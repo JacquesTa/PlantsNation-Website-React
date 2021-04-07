@@ -5,6 +5,41 @@ export const BoxContainer = styled.div`
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  justify-content: center;
+`;
+
+export const TopContainer = styled.div`
+  width: 100%;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 1.8em;
+  padding-bottom: 5em;
+`;
+export const HeaderContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  line-height: 100%;
+`;
+
+export const HeaderText = styled.h2`
+  padding: 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: #ffffff;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 200px;
+  text-transform: uppercase;
+`;
+
+export const InnerContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 1.8em;
 `;
 
 export const FormContainer = styled.form`
@@ -91,4 +126,13 @@ export const FieldError = styled.div`
   font-size: 11px;
   min-height: 18px;
   box-sizing: border-box;
+`;
+
+export const Icons = styled.div`
+  padding: 0;
+  font-size: 50px;
+  z-index: 10;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ce958b;
 `;

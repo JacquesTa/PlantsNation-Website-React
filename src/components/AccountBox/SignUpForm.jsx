@@ -21,8 +21,6 @@ const validationSchema = yup.object({
     .string()
     .min(3, "Enter your real name")
     .required("Full Name is required!"),
-  address: yup.string().required("Enter a valid Address"),
-  number: yup.string().required("Enter a valid number"),
   email: yup.string().email("Enter a valid email address").required(),
   password: yup
     .string()
@@ -34,7 +32,7 @@ const validationSchema = yup.object({
   }),
 });
 export function SignupForm(props) {
-  const { switchToSignin } = useContext(AccountContext);
+  const { switchToLogin } = useContext(AccountContext);
 
   const onSubmit = (values) => {
     alert(JSON.stringify(values));
@@ -43,8 +41,6 @@ export function SignupForm(props) {
   const formik = useFormik({
     initialValues: {
       fullName: "",
-      address: "",
-      number: "",
       email: "",
       password: "",
       password2: "",
@@ -71,38 +67,6 @@ export function SignupForm(props) {
           <FieldError>
             {formik.touched.fullName && formik.errors.fullName
               ? formik.errors.fullName
-              : ""}
-          </FieldError>
-        </FieldContainer>
-
-        <FieldContainer>
-          <Input
-            name="address"
-            type="address"
-            placeholder="Address"
-            value={formik.values.address}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          <FieldError>
-            {formik.touched.address && formik.errors.address
-              ? formik.errors.address
-              : ""}
-          </FieldError>
-        </FieldContainer>
-
-        <FieldContainer>
-          <Input
-            name="number"
-            type="number"
-            placeholder="Number"
-            value={formik.values.number}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          <FieldError>
-            {formik.touched.number && formik.errors.number
-              ? formik.errors.number
               : ""}
           </FieldError>
         </FieldContainer>
@@ -160,8 +124,8 @@ export function SignupForm(props) {
 
       <MutedLink href="#">
         Already have an account?
-        <BoldLink href="#" onClick={switchToSignin}>
-          Signin
+        <BoldLink href="#" onClick={switchToLogin}>
+          Login
         </BoldLink>
       </MutedLink>
     </BoxContainer>

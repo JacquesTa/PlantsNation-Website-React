@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import styled from "styled-components";
-import { SubmitButton } from "./common";
+import { Icons, SubmitButton } from "./common";
 import { motion } from "framer-motion";
 import { AccountContext } from "./accountContext";
 import { LoginForm } from "./LogInForm";
 import { SignupForm } from "./SignUpForm";
 import { ForgottenForm } from "./ForgottenForm";
+import { StartForm } from "./StartForm";
+import { RiPlantFill } from "react-icons/ri";
 
 const BoxContainer = styled.div`
   margin: auto;
@@ -57,6 +59,7 @@ const HeaderContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
+  line-height: 100%;
 `;
 
 const HeaderText = styled.h2`
@@ -66,7 +69,7 @@ const HeaderText = styled.h2`
   color: #ffffff;
   z-index: 10;
   text-align: center;
-  margin-bottom: 150px;
+
   text-transform: uppercase;
 `;
 
@@ -77,8 +80,7 @@ const SmallText = styled.h5`
   font-size: 15px;
   z-index: 10;
   margin: 0;
-  margin-top: -30px;
-  margin-bottom: -60px;
+
   color: rgba(214, 180, 181, 255);
 `;
 
@@ -122,6 +124,12 @@ export function AccountBox(props) {
     }, expandingTransition.duration * 1000 - 1500);
   };
 
+  const switchToStart = () => {
+    playExpandingAnimation();
+    setTimeout(() => {
+      setActive("start");
+    }, 400);
+  };
   const switchToSignup = () => {
     playExpandingAnimation();
     setTimeout(() => {
@@ -146,6 +154,7 @@ export function AccountBox(props) {
     switchToSignup,
     switchToLogin,
     switchToForgotten,
+    switchToStart,
   };
 
   return (
@@ -158,44 +167,41 @@ export function AccountBox(props) {
             variants={backdropVariants}
             transition={expandingTransition}
           />
-          {active === "start" && (
-            <HeaderContainer>
-              <HeaderText>Welcome</HeaderText>
-            </HeaderContainer>
-          )}
+          {active === "start"}
 
           {active === "login" && (
             <HeaderContainer>
-              <HeaderText>Welcome</HeaderText>
-              <HeaderText>Back</HeaderText>
+              <Icons onClick={switchToStart}>
+                {" "}
+                <RiPlantFill />{" "}
+              </Icons>
               <SmallText>Please sign-in to continue!</SmallText>
             </HeaderContainer>
           )}
 
           {active === "signup" && (
             <HeaderContainer>
-              <HeaderText>Create</HeaderText>
-              <HeaderText>Account</HeaderText>
+              <HeaderText>Create Account</HeaderText>
+              <Icons onClick={switchToStart}>
+                {" "}
+                <RiPlantFill />{" "}
+              </Icons>
               <SmallText>Please sign-up to continue!</SmallText>
             </HeaderContainer>
           )}
           {active === "forgotten" && (
             <HeaderContainer>
-              <HeaderText>Enter</HeaderText>
-              <HeaderText>Email</HeaderText>
+              <HeaderText>Enter Email</HeaderText>
+              <Icons onClick={switchToStart}>
+                {" "}
+                <RiPlantFill />{" "}
+              </Icons>
               <SmallText>Please enter your email to receive a link!</SmallText>
             </HeaderContainer>
           )}
         </TopContainer>
         <InnerContainer>
-          <SubmitButton href="#" onClick={switchToLogin}>
-            {" "}
-            LogIn
-          </SubmitButton>
-          <SubmitButton href="#" onClick={switchToSignup}>
-            {" "}
-            SignUp
-          </SubmitButton>
+          {active === "start" && <StartForm />}
           {active === "login" && <LoginForm />}
           {active === "signup" && <SignupForm />}
           {active === "forgotten" && <ForgottenForm />}
